@@ -16,6 +16,12 @@ pipeline {
                 bat '.\\gradlew.bat build'
             }
         }
+        stage('Test') {
+            steps {
+                // Run tests using Gradle
+                bat '.\\gradlew.bat test'
+            }
+        }
     }
     post {
         success {
