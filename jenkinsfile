@@ -12,7 +12,6 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // Run Gradle build command
                 bat '.\\gradlew.bat build'
             }
         }
