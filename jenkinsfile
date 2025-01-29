@@ -6,28 +6,29 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                // Checkout code from Git repository
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/LikhithKorivi/Riskascend.git']])
-            }
-        }
-        stage('Set Permissions') {
-            steps {
-                // Grant execute permissions to gradlew
-                sh 'chmod +x gradlew'
             }
         }
         stage('Build') {
             steps {
-                // Run Gradle build on Linux
+                // Run Gradle build
                 sh './gradlew build'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Run tests using Gradle
+                sh './gradlew test'
             }
         }
     }
     post {
         success {
-            echo 'Build completed successfully!'
+            echo 'Build and tests completed successfully!'
         }
         failure {
-            echo 'Build failed.'
+            echo 'Build or tests failed.'
         }
     }
 }
