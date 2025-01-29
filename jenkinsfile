@@ -12,23 +12,17 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // Run Gradle build
-                sh './gradlew build'
-            }
-        }
-        stage('Test') {
-            steps {
-                // Run tests using Gradle
-                sh './gradlew test'
+                // Run Gradle build command
+                bat '.\\gradlew.bat build'
             }
         }
     }
     post {
         success {
-            echo 'Build and tests completed successfully!'
+            echo 'Build completed successfully!'
         }
         failure {
-            echo 'Build or tests failed.'
+            echo 'Build failed.'
         }
     }
 }
